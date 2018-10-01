@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-container
+spec:
+
+  restartPolicy: Never
+  
+  volumes:
+  - name: shared-data
+    persistentVolumeClaim:
+        claimName: fls-claim
+
+  containers:
+
+  - name: nginx-container
+    image: nginx
+    volumeMounts:
+    - name: shared-data
+      mountPath: /usr/share/nginx/html
